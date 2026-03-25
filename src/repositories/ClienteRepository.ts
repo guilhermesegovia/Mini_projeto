@@ -18,6 +18,8 @@ export class ClienteRepository {
     buscarPorId(id: number): Cliente | null {
         return (db.prepare('SELECT * FROM cliente WHERE id = ?').get(id) as Cliente) ?? null;
     }
-
     
+      buscarPorNome(nome: string): Cliente | null {
+    return (db.prepare("SELECT * FROM clientes WHERE nome LIKE ?").get(`%${nome}%`) as Cliente) ?? null;
+  }
 }

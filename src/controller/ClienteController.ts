@@ -9,5 +9,9 @@ export function ClienteController() {
 
         if (nome) {
             const clientes = await clienteRepository.buscarPorNome(nome as string);
-            if 
+            if (!clientes) return res.status(404).json({ message: 'Cliente não encontrado' });
+            return res.json(clientes);  
         }
+
+
+}
