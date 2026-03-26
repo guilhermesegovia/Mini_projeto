@@ -22,5 +22,25 @@ export class ProdutoRepository {
                 marca: p.marca,
                 id_fornecedor: p.id_fornecedor
             };
-    }  
+    }
+
+    listarProdutos(): Produto[] {
+        return db.prepare('SELECT * FROM produto').all() as Produto[];
+    }
+
+    buscarPorId(id: number): Produto | null {
+        return (db.prepare('SELECT * FROM produto WHERE id = ?').get(id) as Produto) ?? null;
+    }
+
+        buscarPorNome(nome: string): Produto | null {
+    return (db.prepare("SELECT * FROM produto WHERE nome LIKE ?").get(`%${nome}%`) as Produto) ?? null;
+  }    
+
+  buscarPorCategoria(id_categoria: number): Produto[] {
+    return db.prepare('SELECT * FROM produto WHERE id_categoria = ?').get(id_categoria) as Produto[];
+  }
+
+    atualizarEstoque(id: number, estoque: number): void {
+    db.prepare("UPDATE produtos SET estoque = ? WHERE id = ?").run(estoque, id);
+  }
 }

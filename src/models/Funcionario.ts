@@ -3,7 +3,7 @@ export interface Funcionario {
     nome: string;
     setor: string;
     cargo: string;
-    data_nascimento?: Date;
+    data_nascimento: Date;
     cpf: string;
     email: string;
 }

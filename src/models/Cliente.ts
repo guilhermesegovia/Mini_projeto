@@ -7,5 +7,5 @@ export interface Cliente {
     senha: string;
     endereco: string;
     cep: string;
-    data_nascimento?: Date;
+    data_nascimento: Date;
 }
