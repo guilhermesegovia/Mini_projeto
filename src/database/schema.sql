@@ -68,6 +68,7 @@ metodo VARCHAR(20) NOT NULL,
 status_pagamento VARCHAR(30) NOT NULL,
 data_pagamento DATE,
 status_entrega VARCHAR(40) NOT NULL,
+valor DECIMAL(10,2) NOT NULL,
 id_pedido INT,
 FOREIGN KEY (id_pedido) REFERENCES pedido(id)
 );
@@ -97,4 +98,14 @@ CREATE TABLE if not exists avaliacao (
 id INTEGER PRIMARY KEY AUTOINCREMENT,
 comentario VARCHAR(300),
 estrelas DECIMAL(2,1)
+);
+
+CREATE TABLE IF NOT EXISTS carrinho (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+id_cliente INT NOT NULL,
+id_produto INT NOT NULL,
+quantidade INT NOT NULL CHECK(quantidade > 0),
+FOREIGN KEY (id_cliente) REFERENCES cliente(id),
+FOREIGN KEY (id_produto) REFERENCES produto(id),
+UNIQUE(id_cliente, id_produto)
 );

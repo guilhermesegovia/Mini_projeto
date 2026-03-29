@@ -27,6 +27,16 @@ export class FuncionarioRepository {
     }
 
     buscarPorNome(nome: string): Funcionario | null {
-    return (db.prepare("SELECT * FROM funcionario WHERE nome LIKE ?").get(`%${nome}%`) as Funcionario) ?? null;
+        const resultado = db.prepare("SELECT * FROM funcionario WHERE nome LIKE ?").all(`%${nome}%`) as Funcionario[];
+        return resultado.length > 0 ? resultado[0] : null;
   }
+
+    AtualizarFuncionario(id: number, nome: string, setor: string, cargo: string, data_nascimento: Date, cpf: string, email: string): void {
+    db.prepare("UPDATE funcionario SET nome = ?, setor = ?, cargo = ?, data_nascimento = ?, cpf = ?, email = ? WHERE id = ?").run(nome, setor, cargo, data_nascimento, cpf, email, id);
+  }
+
+    DeletarFuncionario(id: number): void {
+        db.prepare('DELETE FROM funcionario WHERE id = ?').run(id);
+    }
+
 }

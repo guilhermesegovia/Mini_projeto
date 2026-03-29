@@ -20,6 +20,11 @@ export class FornecedorRepository {
     }     
 
     BuscarPorNome(nome: string): Fornecedor | null {
-        return  (db.prepare('SELECT * FROM fornecedor WHERE nome LIKE ?').get('%${nome}%') as Fornecedor) ??null;
-    }    
+        const resultado = db.prepare('SELECT * FROM fornecedor WHERE nome_empresa LIKE ?').all(`%${nome}%`) as Fornecedor[];
+        return resultado.length > 0 ? resultado[0] : null;
+    }
+
+    DeletarFornecedor(id: number): void {
+        db.prepare('DELETE FROM fornecedor WHERE id = ?').run(id);
+    }
 }

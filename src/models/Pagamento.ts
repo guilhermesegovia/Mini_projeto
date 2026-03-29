@@ -4,5 +4,6 @@ export interface Pagamento {
     status_pagamento: string;
     data_pagamento: Date;
     status_entrega: string;
+    valor: number;
     id_pedido: number;
 }
