@@ -1,5 +1,5 @@
 import express from "express";
-import { ClienteController } from "./controller/ClienteController";
+import { ClienteController } from "./controller/FornecedorController";
 
 export const app = express();
 

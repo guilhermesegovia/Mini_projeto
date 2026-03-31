@@ -8,7 +8,7 @@ export interface Produto {
     custo: number;
     venda: number;
     estoque: number;
-    data_cadastro: Date;
+    data_cadastro?: Date;
     descricao: string;
     marca: string;
     id_fornecedor: number;
